@@ -1,0 +1,8 @@
+/home/lapquang/code/medical/3D_unet/training.py:92: RuntimeWarning: invalid value encountered in scalar divide
+  wt0 = round(total_labels / (n_classes * label_0), 2)
+/home/lapquang/code/medical/3D_unet/training.py:93: RuntimeWarning: invalid value encountered in scalar divide
+  wt1 = round(total_labels / (n_classes * label_1), 2)
+/home/lapquang/code/medical/3D_unet/training.py:94: RuntimeWarning: invalid value encountered in scalar divide
+  wt2 = round(total_labels / (n_classes * label_2), 2)
+/home/lapquang/code/medical/3D_unet/training.py:95: RuntimeWarning: invalid value encountered in scalar divide
+  wt3 = round(total_labels / (n_classes * label_3), 2)

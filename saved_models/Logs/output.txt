@@ -1,0 +1,8 @@
+Number of training images: 30
+Number of training masks: 30
+==================================================
+Weight for class 0: nan
+Weight for class 1: nan
+Weight for class 2: nan
+Weight for class 3: nan
+==================================================
