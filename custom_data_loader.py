@@ -37,6 +37,8 @@ class BraTS_dataset(Dataset):
         except Exception as e:
             raise ValueError(f"Error loading mask file: {mask_path}, {e}")
 
+        return img, mask
+
 
 def image_loader(img_dir, img_list, mask_dir, mask_list, batch_size, num_workers=24):
     dataset = BraTS_dataset(img_dir, img_list, mask_dir, mask_list)

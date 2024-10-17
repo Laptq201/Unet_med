@@ -54,7 +54,8 @@ class AttentionBlock(nn.Module):
             encoder_channels, encoder_channels//2, kernel_size=1)
         self.phi = nn.Conv3d(
             decoder_channels, encoder_channels//2, kernel_size=1)
-        self.psi = nn.Conv3d(encoder_channels//2, kernel_size=1)
+        self.psi = nn.Conv3d(
+            decoder_channels, encoder_channels//2, kernel_size=1)
         self.out_conv = nn.Conv3d(
             encoder_channels, encoder_channels, kernel_size=1)
         self.sigmoid = nn.Sigmoid()

@@ -1,8 +1,12 @@
-Number of training images: 30
-Number of training masks: 30
+Number of training images: 981
+Number of training masks: 981
 ==================================================
-Weight for class 0: nan
-Weight for class 1: nan
-Weight for class 2: nan
-Weight for class 3: nan
+Weight for class 0: 0.26
+Weight for class 1: 34.48
+Weight for class 2: 8.49
+Weight for class 3: 23.92
 ==================================================
+Device: cuda:0
+Model created with 96884772 parameters
+num_classes: 4, class_weights: tensor([ 0.2600, 34.4800,  8.4900, 23.9200], device='cuda:0')
+Start training

@@ -1,8 +1,30 @@
-/home/lapquang/code/medical/3D_unet/training.py:92: RuntimeWarning: invalid value encountered in scalar divide
-  wt0 = round(total_labels / (n_classes * label_0), 2)
-/home/lapquang/code/medical/3D_unet/training.py:93: RuntimeWarning: invalid value encountered in scalar divide
-  wt1 = round(total_labels / (n_classes * label_1), 2)
-/home/lapquang/code/medical/3D_unet/training.py:94: RuntimeWarning: invalid value encountered in scalar divide
-  wt2 = round(total_labels / (n_classes * label_2), 2)
-/home/lapquang/code/medical/3D_unet/training.py:95: RuntimeWarning: invalid value encountered in scalar divide
-  wt3 = round(total_labels / (n_classes * label_3), 2)
+Traceback (most recent call last):
+  File "/home/lapquang/code/medical/3D_unet/training.py", line 199, in <module>
+    prob = model(imgs)  # Ouput của model sẽ là probablity vì
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/lapquang/code/medical/3D_unet/models.py", line 143, in forward
+    encoder1 = self.encoder1(x)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/lapquang/code/medical/3D_unet/models.py", line 21, in forward
+    return self.conv(x)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 608, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/home/lapquang/anaconda3/envs/medical/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 603, in _conv_forward
+    return F.conv3d(
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1024.00 MiB. GPU 0 has a total capacity of 3.63 GiB of which 934.94 MiB is free. Including non-PyTorch memory, this process has 2.71 GiB memory in use. Of the allocated memory 2.58 GiB is allocated by PyTorch, and 67.94 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

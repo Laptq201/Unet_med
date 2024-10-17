@@ -130,7 +130,7 @@ def dice_score(outputs, masks, class_id, epsilon=1e-7):
 
 class Loss(torch.nn.Module):
     def __init__(self, weight_dice=0.5, weight_ce=0.5,
-                 num_classes=4, class_weights=None, device_num=0):
+                 num_classes=4, class_weights=None):
         super(Loss, self).__init__()
         self.weight_dice = weight_dice
         self.weight_ce = weight_ce
@@ -138,9 +138,9 @@ class Loss(torch.nn.Module):
 
         if class_weights is not None:
             self.num_classes = len(class_weights)
-            device = torch.device(f"cude:{device_num}")
+            device = torch.device(f"cuda")
             class_weights = torch.tensor(
-                class_weights, dype=torch.float32).to(device)
+                class_weights, dtype=torch.float32).to(device)
 
         self.ce_loss = CrossEntropyLoss(weight=class_weights)
         print(

@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
-from custom_data_loader import imageLoader
+from custom_data_loader import image_loader
 from models import *
 from losses import *
 
@@ -45,8 +45,8 @@ sys.stderr = DualStream(sys.stderr, error_file)
 TRAIN_IMG_PATH = "./data/training/images/"
 TRAIN_MASK_PATH = "./data/training/masks/"
 
-VAL_IMG_PATH = "./data/validation/images/"
-VAL_MASK_PATH = "./data/validation/masks/"
+VAL_IMG_PATH = "./data/test/images/"
+VAL_MASK_PATH = "./data/test/masks/"
 ###
 
 
@@ -80,12 +80,12 @@ for img in range(len(train_mask_list)):
     df.append(conts_dict)
 
 
-df = pd.DataFrame(df, columns=columns)
+df = pd.DataFrame(df)
 
-label_0 = df['0'].sum()
-label_1 = df['1'].sum()
-label_2 = df['2'].sum()
-label_3 = df['3'].sum()
+label_0 = df[0].sum()
+label_1 = df[1].sum()
+label_2 = df[2].sum()
+label_3 = df[3].sum()
 total_labels = label_0 + label_1 + label_2 + label_3
 n_classes = 4
 
@@ -133,18 +133,18 @@ print(f"Model created with {count_params(model)} parameters")
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 class_weights_list = [class_weights[i] for i in range(len(class_weights))]
-loss_function = Loss(num_classes=4, class_weights=class_weights_list,
-                     device_num=gpu).to(device)
+loss_function = Loss(
+    num_classes=4, class_weights=class_weights_list).to(device)
 
 
 # Vì tính chất của bộ dataset BraTS nên ta cần phải custom lại hàm
 # dataLoader thay vì sử dụng DataLoader mặc định của PyTorch
-train_data = imageLoader(TRAIN_IMG_PATH, train_img_list,
-                         TRAIN_MASK_PATH, train_mask_list, BATCH_SIZE,
-                         num_worker=8)
-val_data = imageLoader(VAL_IMG_PATH, val_img_list,
-                       VAL_MASK_PATH, val_mask_list, BATCH_SIZE,
-                       num_worker=8)
+train_data = image_loader(TRAIN_IMG_PATH, train_img_list,
+                          TRAIN_MASK_PATH, train_mask_list, BATCH_SIZE,
+                          num_workers=8)
+val_data = image_loader(VAL_IMG_PATH, val_img_list,
+                        VAL_MASK_PATH, val_mask_list, BATCH_SIZE,
+                        num_workers=8)
 
 
 scaler = torch.amp.GradScaler()
@@ -194,7 +194,7 @@ for epoch in range(num_iteration):
         imgs, masks = imgs.to(device), masks.to(device)
         optimizer.zero_grad()
 
-        with torch.amp.autocast():
+        with torch.amp.autocast(device_type='cuda'):
 
             prob = model(imgs)  # Ouput của model sẽ là probablity vì
             # lúc sau ta sẽ dùng cross entropy loss (có trong Loss)
