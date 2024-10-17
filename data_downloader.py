@@ -1,0 +1,20 @@
+import synapseclient
+import os
+import zipfile
+
+current_directory = os.getcwd()
+# print("Current working directory:", current_directory)
+
+auth_token = "eyJ0eXAiOiJKV1QiLCJraWQiOiJXN05OOldMSlQ6SjVSSzpMN1RMOlQ3TDc6M1ZYNjpKRU9VOjY0NFI6VTNJWDo1S1oyOjdaQ0s6RlBUSCIsImFsZyI6IlJTMjU2In0.eyJhY2Nlc3MiOnsic2NvcGUiOlsidmlldyIsImRvd25sb2FkIiwibW9kaWZ5Il0sIm9pZGNfY2xhaW1zIjp7fX0sInRva2VuX3R5cGUiOiJQRVJTT05BTF9BQ0NFU1NfVE9LRU4iLCJpc3MiOiJodHRwczovL3JlcG8tcHJvZC5wcm9kLnNhZ2ViYXNlLm9yZy9hdXRoL3YxIiwiYXVkIjoiMCIsIm5iZiI6MTcyODk2Mzk5NiwiaWF0IjoxNzI4OTYzOTk2LCJqdGkiOiIxMjc2MiIsInN1YiI6IjM1MTg0NTcifQ.AJB4WOAwq9mKqElugXfnfMlsyBjOueWfWRJxKmGbI7THwx6UPRoVrQ6MTQkI5y__fTkmC-QHP64pHnnW7yl8C60NJSHbszCaYRfDF18IQfLhGH5OtgbP3ugLfcqvK5a7_YT_8dy2OyrWRA7AZhKYDxLmxpZ7_p7SB6Q59U540cx_6CxrUEJI73mH8SQDB0zsY2pZEtC8s3c6vgyNQVzmGE_5ipVVDnlpe4Wp2gwkmDAPaAoUPDb9eAgvPoFEozqzdLGnTkUKpYR0lqhKvfeJ7KkgxTiQlXN-8fe2UlVQ5TO7ybTAZF1VB5FCnf6PDiKWG558_-oy1cxk6cpj4VQ4Mg"
+syn = synapseclient.Synapse()
+syn.login(authToken=auth_token)
+
+cart_list_file = syn.get_download_list(downloadLocation="./input")
+print("Downloaded files:", cart_list_file)
+
+file = zipfile.ZipFile(
+    './input/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData.zip')
+file.extractall('./input/')
+
+file.close()
+print("Unzipped training data")
